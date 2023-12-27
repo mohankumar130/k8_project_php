@@ -1,6 +1,6 @@
 FROM php:8.1-apache
 
-COPY .php_crud/ /var/www/html/
+COPY php_crud/ /var/www/html/
 
 WORKDIR /var/www/html
 
