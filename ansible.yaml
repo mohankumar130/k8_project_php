@@ -1,14 +1,13 @@
 ---
 - name: minikube server deployment
-  hosts: minikube
+  hosts: 192.168.1.34
   become: true
   remote_user: kmaster
-  tasks: 
-     - name: delete old deployment
-       command: kubectl delete -f /home/ubuntu/project-php/apache.yml
-    #  - name: delete old service
-    #    command: kubectl delete -f /home/ubuntu/Service.yml
-     - name: create new deployment
-       command: kubectl apply -f /home/ubuntu/project-php/apache.yml
-    #  - name: create new service
-    #    command: kubectl apply -f /home/ubuntu/Service.yml
+  tasks:
+    - name: Delete Kubernetes resource
+      command: kubectl delete -f /home/kmaster/project-php/apache.yaml
+      become_user: kmaster
+    - name: create Kubernetes resource
+      command: kubectl create -f /home/kmaster/project-php/apache.yaml
+      become_user: kmaster
+
